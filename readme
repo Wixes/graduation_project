@@ -1,3 +1,8 @@
+h1 What this is all about?
+This is my graduation project "Accounting system of the professor's achievments on the JavaScript language"
+
+More information soon ^^
+
 1) To start local server use the following command:
 npm run start
 
@@ -17,5 +22,17 @@ password: passwoRrt
 db.users.find().pretty()
 
 Project structure:
-----bin/www - Server configuration
-----app.js - app configuration (handlers for routes, middlewares, error handler, etc.)
+MVC design pattern
+--Controllers (as it says) - Controllers
+--Views - Views
+--Models - Models (obviously right?)
+
+//////////////////////////////////////////////
+
+--helpers - helper packages, such as Joi for data validation
+--routes - routes
+
+--bin/www - Server configuration
+--app.js - app configuration (handlers for routes, middlewares, error handler, etc.)
+--gulpfile.js - gulp, nodemon etc. configurations
+--passport.js - passport configuration
