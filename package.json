@@ -7,17 +7,26 @@
     "gulp_start": "gulp gulp_start"
   },
   "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "bcrypt": "^3.0.8",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
+    "express-promise-router": "^3.0.3",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.8.1",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.4"
   },
   "devDependencies": {
+    "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
-    "gulp-less": "^4.0.1"
+    "gulp-less": "^4.0.1",
+    "gulp-nodemon": "^2.4.2"
   }
 }

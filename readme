@@ -1,0 +1,21 @@
+1) To start local server use the following command:
+npm run start
+
+2) To start gulp without global installation, use the following command:
+./node_modules/.bin/gulp script-name (in our case gulp_start)
+
+3) If mongodb is not working, try the following command:
+sudo service mongod start
+   To check if it works type the following command:
+sudo service mongod status
+
+4) TESTING USER:
+email: email10@mail.com
+password: passwoRrt
+
+5) To check all users in db type the following command:
+db.users.find().pretty()
+
+Project structure:
+----bin/www - Server configuration
+----app.js - app configuration (handlers for routes, middlewares, error handler, etc.)
