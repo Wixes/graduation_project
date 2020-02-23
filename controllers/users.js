@@ -36,7 +36,7 @@ module.exports = {
         const token = signToken(user);
 
         // Respond with token
-        // Here is need to add some variable for front-end (like isLogged: true)
+        // TODO: Here is need to add some variable for front-end (like isLogged: true)
         res.status(200).json({ token });
     },
 
@@ -44,7 +44,9 @@ module.exports = {
         console.log(req.user);
         // Generate token
         const token = signToken(req.user);
-        // TODO: Save token to the localStorage and set it as header 'authorization'
+
+        // Create cookies
+        res.cookie('jwt', token, {httpOnly: true, secure: true});
 
         // Send status in the end
         res.status(200).json({ token });
