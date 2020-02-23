@@ -8,12 +8,7 @@ module.exports = {
             if (result.error) {
                 return res.status(400).json(result.error);
             }
-            
-            // req.value.body isntead of req.body
-            if (!req.value) {
-                req.value = {};
-            }
-            req.value['body'] = result.value;
+
             next();
         }
     },

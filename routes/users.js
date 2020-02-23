@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 // Create a new user and, if exist, render error
 router.post('/register', validateBody(schemas.authSchema), UsersController.signUp);
 
-router.post('/login', validateBody(schemas.signInSchema), passport.authenticate('local', { session: false}) ,UsersController.signIn);
+router.post('/login', validateBody(schemas.signInSchema), passport.authenticate('local', { session: false}), UsersController.signIn);
 
 router.get('/secret', passport.authenticate('jwt', { session: false }), UsersController.secret);
 

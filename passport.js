@@ -8,6 +8,7 @@ const User = require('./models/user');
 
 // jwt strategy
 passport.use(new JwtStrategy({
+    // TODO: make cookies
     jwtFromRequest: ExtractJwt.fromHeader('authorization'),
     secretOrKey: JWT_SECRET
 }, async (payload, done) => {

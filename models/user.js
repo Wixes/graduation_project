@@ -29,7 +29,7 @@ const user = new db.Schema({
     },
 });
 
-// Use mongoose middleware to has password
+// Use mongoose middleware to hash password
 // We're not using arrow functions here, because we need reference (this)
 user.pre('save', async function(next) {
     try {
@@ -43,6 +43,7 @@ user.pre('save', async function(next) {
     }
 });
 
+// Add method to compare passwords
 user.methods.isValidPassword = async function(newPassword) {
     try {
         return await bcrypt.compare(newPassword, this.password);
