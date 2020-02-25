@@ -3,11 +3,16 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 
 // Handlers for routes
 const userRouter = require('./routes/users');
 
 const app = express();
+
+// FOR TESTING PURPOSES
+mongoose.connect(process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/usersCredentials", { useNewUrlParser:true })
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
