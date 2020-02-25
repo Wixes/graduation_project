@@ -1,11 +1,7 @@
-//const db = require('../config/database');
 const bcrypt = require('bcrypt');
-
-// FOR TESTING PURPOSES
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
 
-const user = new Schema({
+const user = new mongoose.Schema({
     firstname: {
         type: String,
         required: true,
