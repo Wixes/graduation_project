@@ -38,11 +38,10 @@ module.exports = {
         // Save token to the cookie
         res.cookie('jwt', token, {httpOnly: true, secure: true});
 
-        res.render('index', { isAuthorised: true, name: req.user.firstname });
+        res.render('index', { isAuthorised: true, name: user.firstname });
     },
 
     signIn: async (req, res, next) => {
-        console.log(req.user);
         // Generate token
         const token = signToken(req.user);
 
