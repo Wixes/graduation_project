@@ -27,6 +27,7 @@ const user = new db.Schema({
         minlength: 7,
         maxlength: 128
     },
+    files: [ String ]
 });
 
 // Use mongoose middleware to hash password

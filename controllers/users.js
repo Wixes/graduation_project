@@ -35,9 +35,10 @@ module.exports = {
         // Generate the token
         const token = signToken(user);
 
-        // Respond with token
-        // TODO: Here is need to add some variable for front-end (like isLogged: true)
-        res.status(200).json({ token });
+        // Save token to the cookie
+        res.cookie('jwt', token, {httpOnly: true, secure: true});
+
+        res.render('index', { isAuthorised: true, name: req.user.firstname });
     },
 
     signIn: async (req, res, next) => {
@@ -48,12 +49,24 @@ module.exports = {
         // Create cookies
         res.cookie('jwt', token, {httpOnly: true, secure: true});
 
-        // Send status in the end
-        res.status(200).json({ token });
+        // Render page (not redirect) with parameters
+        res.render('index', { isAuthorised: true, name: req.user.firstname });
     },
 
+    // Logout user
+    logOut: async (req, res, next) => {
+        res.clearCookie('jwt');
+        res.redirect('/');
+    },
+
+    // Redirect to the profile page (to update URL)
     secret: async (req, res, next) => {
         console.log('Token is ok, you accessed to be here');
-        res.render('secret');
+        res.redirect('profile');
+    },
+
+    // Profile page
+    profile: async (req, res, next) => {
+        res.render('profile', {title: `${req.user.firstname} profile`, name: req.user.firstname });
     }
 }
