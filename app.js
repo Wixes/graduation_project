@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const connectDB = require("./config/database");
 
+// execute connection to the database
 connectDB();
 
 // Handlers for routes
