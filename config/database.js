@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const url = "mongodb://127.0.0.1:27017/usersCredentials";
+const url = "mongodb+srv://Wixes98:kSynQUuVWJqRtv6@graduation-klcor.mongodb.net/test?retryWrites=true&w=majority";
 
 mongoose.connect(url, {useNewUrlParser:true}, function (err) {
     if (err) {
