@@ -3,11 +3,19 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mongoose = require('mongoose');
 
 // Handlers for routes
 const userRouter = require('./routes/users');
 
 const app = express();
+
+// FOR TESTING PURPOSES
+mongoose.connect("mongodb+srv://Wixes98:kSynQUuVWJqRtv6@graduation-klcor.mongodb.net/usersCredentials", { useNewUrlParser:true }, function(err) {
+  if (err) console.log("Can not connect to the database");
+  else console.log("Connection is OK!");
+});
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

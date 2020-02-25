@@ -1,7 +1,11 @@
-const db = require('../config/database');
+//const db = require('../config/database');
 const bcrypt = require('bcrypt');
 
-const user = new db.Schema({
+// FOR TESTING PURPOSES
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const user = new Schema({
     firstname: {
         type: String,
         required: true,
@@ -53,4 +57,4 @@ user.methods.isValidPassword = async function(newPassword) {
     }
 };
 
-module.exports = db.model('User', user);
+module.exports = mongoose.model('User', user);
