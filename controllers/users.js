@@ -1,5 +1,4 @@
 const JWT = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
 const User = require('../models/user');
 const { JWT_SECRET } = require('../config/configs');
 
@@ -56,12 +55,6 @@ module.exports = {
     logOut: async (req, res, next) => {
         res.clearCookie('jwt');
         res.redirect('/');
-    },
-
-    // Redirect to the profile page (to update URL)
-    secret: async (req, res, next) => {
-        console.log('Token is ok, you accessed to be here');
-        res.redirect('profile');
     },
 
     // Profile page

@@ -11,6 +11,7 @@ connectDB();
 
 // Handlers for routes
 const userRouter = require('./routes/users');
+const profileRouter = require('./routes/profile');
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Use middlewares
 app.use('/', userRouter);
+app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

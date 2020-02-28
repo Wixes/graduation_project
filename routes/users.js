@@ -6,14 +6,21 @@ const { validateBody, schemas } = require('../helpers/routeHelper');
 const UsersController = require('../controllers/users');
 const passportConfig = require('../passport');
 
-// TODO: Make it as controller (remove logic from route)
-// Idea: make it as middleware for EACH request
+// Callback functions doesn't have access to req, res objects
+// That's why we're using such a construction.
+// https://github.com/jaredhanson/passport/issues/1
 router.get('/', function(req, res, next) {
   passport.authenticate('jwt', {session: false}, (err, user, profile) => {
     if (err) return next(err);
-    if (!user) return res.render('index');
-    return res.render('index', { title: "Record your achievments!", isAuthorised: true, name: user.firstname })
-  })(req, res, next);
+    if (!user) return res.render('index'); // Render page for guest
+    return res.render('index', {           // Render page for user
+       title: "Record your achievments!", 
+       isAuthorised: true,
+       name: user.firstname
+       })
+  })(req, res, next); // Sends arguments to the callback
+                      // (For more info check this link:
+                      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions)
 });
 
 router.post('/register', validateBody(schemas.authSchema), UsersController.signUp);
@@ -21,9 +28,5 @@ router.post('/register', validateBody(schemas.authSchema), UsersController.signU
 router.post('/login', validateBody(schemas.signInSchema), passport.authenticate('local', { session: false}), UsersController.signIn);
 
 router.get('/logout', UsersController.logOut);
-
-router.get('/secret', passport.authenticate('jwt', { session: false }), UsersController.secret);
-
-router.get('/profile', passport.authenticate('jwt', { session: false}), UsersController.profile);
 
 module.exports = router;
