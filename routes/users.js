@@ -6,7 +6,7 @@ const { validateBody, schemas } = require('../helpers/routeHelper');
 const UsersController = require('../controllers/users');
 const passportConfig = require('../passport');
 
-// Callback functions doesn't have access to req, res objects
+// Callback function doesn't have access to req, res objects
 // That's why we're using such a construction.
 // https://github.com/jaredhanson/passport/issues/1
 router.get('/', function(req, res, next) {

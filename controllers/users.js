@@ -1,6 +1,7 @@
 const JWT = require('jsonwebtoken');
 const User = require('../models/user');
 const { JWT_SECRET } = require('../config/configs');
+const fs = require('fs');
 
 // Function for create a token
 signToken = user => {
@@ -22,6 +23,13 @@ module.exports = {
             return res.status(403).json({ error: 'Email is already in use' });
         }
 
+        // Create a profile photo
+/*         let picture = {
+            type: 'image/jpeg',
+            data: fs.readFileSync(process.cwd() + '/public/images/default.jpeg')
+        }; */
+
+
         // Create a new user
         let user = new User({
             firstname,
@@ -29,7 +37,13 @@ module.exports = {
             email,
             password
         });
-        await user.save();
+        user.picture.data = fs.readFileSync(process.cwd() + '/public/images/default.jpeg');
+        user.picture.contentType = 'image/jpeg';
+        await user.save(function(err, user) {
+            if (err) throw err;
+
+            console.log('user is created in database');
+        });
 
         // Generate the token
         const token = signToken(user);
@@ -55,10 +69,6 @@ module.exports = {
     logOut: async (req, res, next) => {
         res.clearCookie('jwt');
         res.redirect('/');
-    },
-
-    // Profile page
-    profile: async (req, res, next) => {
-        res.render('profile', {title: `${req.user.firstname} profile`, name: req.user.firstname });
     }
+
 }
