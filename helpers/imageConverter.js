@@ -1,8 +1,9 @@
 const btoa = require('btoa');
 
-// For more info check this link:
-// https://varvy.com/pagespeed/base64-images.html
 module.exports = {
+    // convert the image from binary(b) to ASCII(a)
+    // ASCII - is the result of base64 encoding
+    // binary - is any stream of a string type
     base64pic: (buffer) => {
         let binary = '';
         let bytes = [].slice.call(new Uint8Array(buffer));

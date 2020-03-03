@@ -23,13 +23,6 @@ module.exports = {
             return res.status(403).json({ error: 'Email is already in use' });
         }
 
-        // Create a profile photo
-/*         let picture = {
-            type: 'image/jpeg',
-            data: fs.readFileSync(process.cwd() + '/public/images/default.jpeg')
-        }; */
-
-
         // Create a new user
         let user = new User({
             firstname,
@@ -37,11 +30,13 @@ module.exports = {
             email,
             password
         });
+        // Add to the user object 'picture' with 2 properties: 'data' and 'contentType'
         user.picture.data = fs.readFileSync(process.cwd() + '/public/images/default.jpeg');
         user.picture.contentType = 'image/jpeg';
+
+        // Save user to the database
         await user.save(function(err, user) {
             if (err) throw err;
-
             console.log('user is created in database');
         });
 
@@ -51,7 +46,11 @@ module.exports = {
         // Save token to the cookie
         res.cookie('jwt', token, {httpOnly: true, secure: true});
 
-        res.render('index', { isAuthorised: true, name: user.firstname });
+        // Render page
+        res.render('index', {
+            isAuthorised: true,
+            name: user.firstname
+        });
     },
 
     signIn: async (req, res, next) => {
@@ -62,7 +61,10 @@ module.exports = {
         res.cookie('jwt', token, {httpOnly: true, secure: true});
 
         // Render page (not redirect) with parameters
-        res.render('index', { isAuthorised: true, name: req.user.firstname });
+        res.render('index', {
+            isAuthorised: true,
+            name: req.user.firstname
+        });
     },
 
     // Logout user
