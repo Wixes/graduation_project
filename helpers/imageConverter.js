@@ -1,5 +1,7 @@
 const btoa = require('btoa');
 
+// For more info check this link:
+// https://varvy.com/pagespeed/base64-images.html
 module.exports = {
     base64pic: (buffer) => {
         let binary = '';
