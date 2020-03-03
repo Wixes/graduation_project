@@ -1,6 +1,9 @@
 extends layout
-
 block content
+  include includes/header.pug
   div.content.class1
     p HELLO #{name}, how are ya?
     img.profile-pic(src="data:image/jpeg; base64, " + pic)
+    form(action='/profile/upload', method='post', enctype='multipart/form-data')
+      label(for="avatar-upload").custom-file-upload Изменить
+      input(type='file', id='avatar-upload', name='avatar-upload' onchange='this.form.submit()')

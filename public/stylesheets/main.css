@@ -74,3 +74,13 @@ footer {
 .profile-pic {
   width: 330px;
 }
+input[type='file'] {
+  display: none;
+}
+.custom-file-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #F0F0F0;
+}

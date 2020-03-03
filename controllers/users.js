@@ -31,7 +31,7 @@ module.exports = {
             password
         });
         // Add to the user object 'picture' with 2 properties: 'data' and 'contentType'
-        user.picture.data = fs.readFileSync(process.cwd() + '/public/images/default.jpeg');
+        user.picture.data = fs.readFileSync(process.cwd() + '/public/images/default.jpg');
         user.picture.contentType = 'image/jpeg';
 
         // Save user to the database
