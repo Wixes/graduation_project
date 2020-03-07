@@ -1,7 +1,6 @@
 const JWT = require('jsonwebtoken');
 const User = require('../models/user');
 const { JWT_SECRET } = require('../config/configs');
-const fs = require('fs');
 
 // Function for create a token
 signToken = user => {
@@ -30,9 +29,6 @@ module.exports = {
             email,
             password
         });
-        // Add to the user object 'picture' with 2 properties: 'data' and 'contentType'
-        user.picture.data = fs.readFileSync(process.cwd() + '/public/images/default.jpg');
-        user.picture.contentType = 'image/jpeg';
 
         // Save user to the database
         await user.save(function(err, user) {
@@ -63,7 +59,7 @@ module.exports = {
         // Render page (not redirect) with parameters
         res.render('index', {
             isAuthorised: true,
-            name: req.user.firstname
+            name: req.user.firstname,
         });
     },
 

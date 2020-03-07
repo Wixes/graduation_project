@@ -1,14 +1,17 @@
-const {base64pic} = require('../helpers/imageConverter');
+const { base64pic } = require('../helpers/imageConverter');
+const fs = require('fs');
 
 module.exports = {
     profile: async (req, res, next) => {
         console.log(req.user);
-        const pic = base64pic(req.user.picture.data);
+        // read file from filesystem -> encode it to base64 -> assign to variable
+        const avatar = base64pic(fs.readFileSync(req.user.picture));
+
         res.render('profile', {
             isAuthorised: true,
             title: `${req.user.firstname} profile`,
             name: req.user.firstname,
-            pic: pic
+            avatar: avatar
         });
     },
     upload: async (req, res, next) => {

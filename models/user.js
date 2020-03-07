@@ -29,8 +29,8 @@ const user = new mongoose.Schema({
     },
     files: [ String ],
     picture: {
-        data: Buffer,
-        contentType: String
+        type: String,
+        default: 'uploads/avatars/default.jpg'
     }
 });
 
