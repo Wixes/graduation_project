@@ -1,10 +1,12 @@
 const { base64pic } = require('../helpers/imageConverter');
 const fs = require('fs');
+const User = require('../models/user');
 
 module.exports = {
     profile: async (req, res, next) => {
         console.log(req.user);
-        // read file from filesystem -> encode it to base64 -> assign to variable
+
+        // Read file from filesystem -> encode it to base64 -> assign to variable
         const avatar = base64pic(fs.readFileSync(req.user.picture));
 
         res.render('profile', {
@@ -14,11 +16,27 @@ module.exports = {
             avatar: avatar
         });
     },
+
     upload: async (req, res, next) => {
-        console.log(req.file);
-        res.status(200).json({ 
-            filename: req.file.originalname,
-            type: req.file.mimetype
+        const newImage = {
+            picture: req.file.path
+        };
+
+        const avatar = base64pic(fs.readFileSync(newImage.picture));
+
+        await User.findByIdAndUpdate(req.user._id, newImage, function (err, res) {
+            if (err) {
+                console.log ('Whoops! Something went wrong!');
+                return;
+            } else {
+                console.log('Image updated');
+            }
+        });
+        res.render('profile', {
+            isAuthorised: true,
+            title: `${req.user.firstname} profile`,
+            name: req.user.firstname,
+            avatar: avatar
         });
     }
 }
