@@ -77,10 +77,14 @@ footer {
 input[type='file'] {
   display: none;
 }
-.custom-file-upload {
+.custom-avatar-upload {
   border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   cursor: pointer;
   background-color: #F0F0F0;
+}
+.custom-files-upload > b {
+  color: rgba(245, 110, 110, 0.8);
+  cursor: pointer;
 }

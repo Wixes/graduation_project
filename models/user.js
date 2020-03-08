@@ -27,7 +27,11 @@ const user = new mongoose.Schema({
         minlength: 7,
         maxlength: 128
     },
-    files: [ String ],
+    files: [{
+        name: String,
+        path: String,
+        date: Date
+    }],
     picture: {
         type: String,
         default: 'uploads/avatars/default.jpg'

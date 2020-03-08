@@ -1,27 +1,62 @@
 const multer = require('multer');
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './uploads/avatars');
-    },
-    filename: function(req, file, cb){
-        cb(null, new Date().toISOString() + file.originalname);
-    }
-});
 
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+// SETTINGS FOR AVATAR UPLOAD
+const avatar = {
+    storage: multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, './uploads/avatars');
+        },
+        filename: function(req, file, cb){
+            cb(null, new Date().toISOString() + file.originalname);
+        }
+    }),
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
             cb(null, true);
-    } else {
-        cb(null, false);
+        } else {
+            cb(null, false);
+        }
     }
 };
 
-const upload = multer({ 
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-});
+// SETTINGS FOR FILES UPLOAD
+const files = {
+    storage: multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, './uploads/files');
+        },
+        filename: function(req, file, cb){
+            cb(null, new Date().toISOString() + file.originalname);
+        }
+    }),
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype === 'application/msword' ||
+            file.mimetype === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+            file.mimetype === 'application/pdf' ||
+            file.mimetype === 'image/jpeg' ||
+            file.mimetype === 'image/png'
+            ) {
+            cb(null, true);
+        } else {
+            cb(null, false);
+        }
+    }
+};
 
-module.exports = upload;
+module.exports = {
+    upload_avatar: multer({
+        storage: avatar.storage,
+        limits: {
+            fileSize: 1024 * 1024 * 5
+        },
+        fileFilter: avatar.fileFilter
+    }),
+
+    upload_files: multer({
+        storage: files.storage,
+        limits: {
+            fileSize: 1024 * 1024 * 15
+        },
+        fileFilter: files.fileFilter
+    })
+}

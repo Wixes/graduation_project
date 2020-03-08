@@ -4,7 +4,7 @@ const User = require('../models/user');
 
 module.exports = {
     profile: async (req, res, next) => {
-        console.log(req.user);
+        console.log('User: ' + req.user);
 
         // Kludge, sorry for that :)
         // If user previously uploaded picture, but for some reason
@@ -27,7 +27,7 @@ module.exports = {
         });
     },
 
-    upload: async (req, res, next) => {
+    upload_avatar: async (req, res, next) => {
         // Create variable for new image
         const newImage = {
             picture: req.file.path
@@ -52,5 +52,12 @@ module.exports = {
             name: req.user.firstname,
             avatar: avatar
         });
+    },
+
+    upload_files: async (req, res, next) => {
+        res.json({
+            'Files': req.files,
+            'Text fields:': req.body
+        })
     }
 }

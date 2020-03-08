@@ -1,9 +1,21 @@
 extends layout
 block content
   include includes/header.pug
-  div.content.class1
+  .content.class1
     p HELLO #{name}, how are ya?
     img.profile-pic(src="data:image/jpeg; base64, " + avatar)
     form(action='/profile/upload/image', method='post', enctype='multipart/form-data')
-      label(for="avatar-upload").custom-file-upload Изменить
-      input(type='file', id='avatar-upload', name='avatar-upload' onchange='this.form.submit()')
+      label(for="avatar-upload").custom-avatar-upload Изменить
+      input(type='file', id='avatar-upload', name='avatar-upload', onchange='this.form.submit()')
+  .files
+    -isEmpty = true
+    if isEmpty
+      .list-empty
+        form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
+          label(for='files-upload').custom-files-upload <b> click here </b>  
+          input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')  
+        p You don't have any files!      
+        p drag'n'drop files in this section to upload
+    else 
+      p Here is some logic
+
