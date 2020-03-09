@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 
+// User schema
 const user = new mongoose.Schema({
     firstname: {
         type: String,
@@ -29,8 +30,11 @@ const user = new mongoose.Schema({
     },
     files: [{
         name: String,
-        path: String,
-        date: Date
+        path: String
+        /* date: {
+            type: Date,
+            default: () => Date.now().toLocaleString()
+        } */
     }],
     picture: {
         type: String,

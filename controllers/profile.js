@@ -37,27 +37,40 @@ module.exports = {
         const avatar = base64pic(fs.readFileSync(newImage.picture));
 
         // Find user and upload an image
-        await User.findByIdAndUpdate(req.user._id, newImage, function (err, res) {
+        await User.findByIdAndUpdate(req.user._id, newImage, {new: true}, function (err, user) {
             if (err) {
                 console.log ('Whoops! Something went wrong!');
                 return;
             } else {
                 console.log('Image updated');
+                res.render('profile', {
+                    isAuthorised: true,
+                    title: `${user.firstname} profile`,
+                    name: user.firstname,
+                    avatar: avatar
+                });
             }
         });
         
-        res.render('profile', {
-            isAuthorised: true,
-            title: `${req.user.firstname} profile`,
-            name: req.user.firstname,
-            avatar: avatar
-        });
     },
 
     upload_files: async (req, res, next) => {
+
+        // Map necessary properties
+        let files = req.files.map(obj => {
+            let rObj = {}
+            rObj['name'] = obj.originalname
+            rObj['path'] = obj.path
+            return rObj
+        });
+
+
+        await User.findByIdAndUpdate(req.user._id, {$push: {
+            files: files
+        }}).exec();
+
         res.json({
-            'Files': req.files,
-            'Text fields:': req.body
+            'Files': req.files
         })
     }
 }
