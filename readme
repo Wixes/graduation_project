@@ -21,16 +21,11 @@ password: passwoRrt
 5) To check all users in db type the following command:
 db.users.find().pretty()
 
-Project structure:
-MVC design pattern
---Controllers (as it says) - Controllers
---Views - Views
---Models - Models (obviously right?)
-
 //////////////////////////////////////////////
 
 --helpers - helper packages, such as Joi for data validation
 --routes - routes
+--config - configuration files
 
 --bin/www - Server configuration
 --app.js - app configuration (handlers for routes, middlewares, error handler, etc.)

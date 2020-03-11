@@ -22,7 +22,8 @@ module.exports = {
                 isAuthorised: true,
                 title: `${req.user.firstname} profile`,
                 name: req.user.firstname,
-                avatar: avatar
+                avatar: avatar,
+                files: req.user.files
             });
         });
     },
@@ -47,7 +48,8 @@ module.exports = {
                     isAuthorised: true,
                     title: `${user.firstname} profile`,
                     name: user.firstname,
-                    avatar: avatar
+                    avatar: avatar,
+                    files: user.files
                 });
             }
         });
@@ -69,8 +71,12 @@ module.exports = {
             files: files
         }}).exec();
 
-        res.json({
-            'Files': req.files
-        })
+        res.render('profile', {
+            isAuthorised: true,
+            title: `${user.firstname} profile`,
+            name: user.firstname,
+            avatar: avatar,
+            files: files
+        });
     }
 }

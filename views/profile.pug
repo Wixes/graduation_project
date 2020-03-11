@@ -8,8 +8,7 @@ block content
       label(for="avatar-upload").custom-avatar-upload Изменить
       input(type='file', id='avatar-upload', name='avatar-upload', onchange='this.form.submit()')
   .files
-    -isEmpty = true
-    if isEmpty
+    if !files
       .list-empty
         form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
           label(for='files-upload').custom-files-upload <b> click here </b>  
@@ -17,5 +16,7 @@ block content
         p You don't have any files!      
         p drag'n'drop files in this section to upload
     else 
-      p Here is some logic
+      ul
+        each file, index in files
+          li= index + ": " + file.name
 
