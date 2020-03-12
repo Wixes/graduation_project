@@ -64,19 +64,38 @@ module.exports = {
             rObj['name'] = obj.originalname
             rObj['path'] = obj.path
             return rObj
-        });
+        });        
 
-
+        // Find user and update his files with $push operation
         await User.findByIdAndUpdate(req.user._id, {$push: {
             files: files
         }}).exec();
 
+        // Create new variable for render full list of items w/o calling database
+        const filesRender = files.concat(req.user.files);
+
         res.render('profile', {
             isAuthorised: true,
-            title: `${user.firstname} profile`,
-            name: user.firstname,
-            avatar: avatar,
-            files: files
+            title: `${req.user.firstname} profile`,
+            name: req.user.firstname,
+            avatar: base64pic(fs.readFileSync(req.user.picture)),
+            files: filesRender
         });
+    },
+
+    download_files: async(req, res, next) => {
+        
+        // Check if file in the list and download it
+        for (const file of req.user.files) {
+            if (file._id == req.params.id) {
+
+                // TODO: make a callback
+                res.download(file.path);
+                break;
+            }
+            else {
+                console.log('There is no such fle!');
+            }
+        };
     }
 }

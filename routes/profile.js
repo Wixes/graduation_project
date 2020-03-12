@@ -12,4 +12,6 @@ router.post('/upload/image', passport.authenticate('jwt', { session: false }), u
 
 router.post('/upload/files', passport.authenticate('jwt', { session: false }), upload_files.array('files-upload', 6), profileController.upload_files);
 
+router.get('/download/files/:id', passport.authenticate('jwt', { session: false }), profileController.download_files);
+
 module.exports = router;

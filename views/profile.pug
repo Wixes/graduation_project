@@ -16,7 +16,11 @@ block content
         p You don't have any files!      
         p drag'n'drop files in this section to upload
     else 
+      form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
+        label(for='files-upload').custom-files-upload <b> click here </b>  
+        input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')
       ul
         each file, index in files
-          li= index + ": " + file.name
+          li
+            a(href='/profile/download/files/' + file._id)= index + ": " + file.name
 
