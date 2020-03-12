@@ -14,9 +14,12 @@ sudo service mongod start
    To check if it works type the following command:
 sudo service mongod status
 
-4) TESTING USER:
-email: email10@mail.com
-password: passwoRrt
+4) To undo a commit and redo use:
+git commit -m "Misinfo"
+git reset HEAD~
+(edit files as necessary)
+git add ...
+git commit... again
 
 5) To check all users in db type the following command:
 db.users.find().pretty()

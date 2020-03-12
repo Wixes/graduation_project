@@ -19,8 +19,9 @@ block content
       form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
         label(for='files-upload').custom-files-upload <b> click here </b>  
         input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')
-      ul
+      ul.fles
         each file, index in files
-          li
-            a(href='/profile/download/files/' + file._id)= index + ": " + file.name
+          li.file
+            a(href='/profile/download/files/' + file._id).file-download= index + ": " + file.name
+            a(href='/profile/delete/files/' + file._id).file-delete delete file
 

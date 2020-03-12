@@ -33,10 +33,7 @@ module.exports = {
         const newImage = {
             picture: req.file.path
         };
-
-        // Encode image to base64 (needed for correct re-render)
-        const avatar = base64pic(fs.readFileSync(newImage.picture));
-
+        
         // Find user and upload an image
         await User.findByIdAndUpdate(req.user._id, newImage, {new: true}, function (err, user) {
             if (err) {
@@ -44,13 +41,7 @@ module.exports = {
                 return;
             } else {
                 console.log('Image updated');
-                res.render('profile', {
-                    isAuthorised: true,
-                    title: `${user.firstname} profile`,
-                    name: user.firstname,
-                    avatar: avatar,
-                    files: user.files
-                });
+                res.redirect('/profile');
             }
         });
         
@@ -71,16 +62,7 @@ module.exports = {
             files: files
         }}).exec();
 
-        // Create new variable for render full list of items w/o calling database
-        const filesRender = files.concat(req.user.files);
-
-        res.render('profile', {
-            isAuthorised: true,
-            title: `${req.user.firstname} profile`,
-            name: req.user.firstname,
-            avatar: base64pic(fs.readFileSync(req.user.picture)),
-            files: filesRender
-        });
+        res.redirect('/profile');
     },
 
     download_files: async(req, res, next) => {
@@ -94,7 +76,37 @@ module.exports = {
                 break;
             }
             else {
-                console.log('There is no such fle!');
+                console.log('There is no such file!');
+            }
+        };
+    },
+
+    delete_files: async (req, res, next) => {
+        // Check if file in the list
+        for (const file of req.user.files) {
+            if (file._id == req.params.id) {
+
+                // Find user and delete specific field in database
+                await User.findByIdAndUpdate(req.user._id, {$pull: {
+                    files: file
+                }}).exec();
+
+                // delete file from filesystem
+                fs.unlink(file.path, function(err) {
+                    if (err && err.code == 'ENOENT') {
+                        console.log('File doesnt exist, wont remove it!');
+                    } else if (err) {
+                        console.log('Error while trying to remove file!');
+                    } else {
+                        console.log('File removed');
+                    }
+                });
+
+                // Redirect (for correct rendering) at the same page
+                res.redirect('/profile');
+            }
+            else {
+                console.log('There is no such file for deletion!');
             }
         };
     }
