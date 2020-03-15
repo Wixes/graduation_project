@@ -6,6 +6,15 @@ input[type='file'] {
     display: none;
 }
 
+.list-empty > p {
+    font-size: large;
+}
+
+.files {
+    background-color: rgba(168, 168, 255, 0.4);
+    margin: 20px 0 0 0;
+}
+
 .custom-avatar-upload {
     border: 1px solid #ccc;
     display: inline-block;
@@ -14,12 +23,49 @@ input[type='file'] {
     background-color: #F0F0F0;
 }
 
-.custom-files-upload > b {
-    color: rgba(245, 110, 110, 0.8);
+.custom-files-upload {
+    font-weight: bold;
+    display: inline-block;
     cursor: pointer;
+    background-color: #a69d00;
+    color: #fff200;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
 }
 
 .file-delete {
-    padding: 0 20px;
+    margin: 0 20px;
     color: rgba(163, 8, 47, 0.8);
+}
+
+.file-download {
+    text-decoration: none;
+}
+
+.files-description {
+    background-color: rgb(235, 235, 235);
+}
+
+.files-list {
+    font-size: large;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 1fr;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.files-list > span {
+    padding: 8px;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+.item {
+    background-color: rgb(235, 235, 235);
+}
+
+.item:hover {
+    background-color: rgb(198, 202, 255);
 }

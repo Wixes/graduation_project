@@ -30,11 +30,8 @@ const user = new mongoose.Schema({
     },
     files: [{
         name: String,
-        path: String
-        /* date: {
-            type: Date,
-            default: () => Date.now().toLocaleString()
-        } */
+        path: String,
+        date: String
     }],
     picture: {
         type: String,

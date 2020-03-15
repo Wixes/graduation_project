@@ -18,12 +18,17 @@ module.exports = {
             } else {
                 avatar = base64pic(data);
             };
+            // Check if files in database
+            let files = 0;
+            if (!req.user.files.length == 0)
+                files = req.user.files;
+
             res.render('profile', {
                 isAuthorised: true,
                 title: `${req.user.firstname} profile`,
                 name: req.user.firstname,
                 avatar: avatar,
-                files: req.user.files
+                files: files
             });
         });
     },
@@ -52,8 +57,10 @@ module.exports = {
         // Map necessary properties
         let files = req.files.map(obj => {
             let rObj = {}
+            let date = new Date();
             rObj['name'] = obj.originalname
             rObj['path'] = obj.path
+            rObj['date'] = date.toISOString().substring(0, 10)
             return rObj
         });        
 
@@ -92,7 +99,7 @@ module.exports = {
                 }}).exec();
 
                 // delete file from filesystem
-                fs.unlink(file.path, function(err) {
+                await fs.unlink(file.path, function(err) {
                     if (err && err.code == 'ENOENT') {
                         console.log('File doesnt exist, wont remove it!');
                     } else if (err) {

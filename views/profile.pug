@@ -17,11 +17,24 @@ block content
         p drag'n'drop files in this section to upload
     else 
       form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
-        label(for='files-upload').custom-files-upload <b> click here </b>  
+        label(for='files-upload').custom-files-upload Добавить файлы
         input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')
-      ul.fles
+      .files-list
+        span.files-description.files-index
+          strong Номер
+        span.files-description.files-name
+          strong Название
+        span.files-description.files-date
+          strong Дата создания
+        span.files-description.files-actions
+          strong Действие
         each file, index in files
-          li.file
-            a(href='/profile/download/files/' + file._id).file-download= index + ": " + file.name
+          span.item.file-index
+            i #{index+1}
+          span.item.file-name
+            a(href='/profile/download/files/' + file._id).file-download= file.name
+          span.item.file-date
+            i= file.date
+          span.item.file-actions
             a(href='/profile/delete/files/' + file._id).file-delete delete file
 
