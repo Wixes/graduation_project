@@ -11,7 +11,7 @@ block content
     if !files
       .list-empty
         form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
-          label(for='files-upload').custom-files-upload <b> click here </b>  
+          label(for='files-upload').custom-files-upload Добавить файлы
           input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')  
         p You don't have any files!      
         p drag'n'drop files in this section to upload
@@ -29,12 +29,16 @@ block content
         span.files-description.files-actions
           strong Действие
         each file, index in files
-          span.item.file-index
-            i #{index+1}
-          span.item.file-name
-            a(href='/profile/download/files/' + file._id).file-download= file.name
-          span.item.file-date
-            i= file.date
-          span.item.file-actions
-            a(href='/profile/delete/files/' + file._id).file-delete delete file
+          .item
+            span.file-index
+              i #{index+1}
+          .item
+            span.file-name
+              a(href='/profile/download/files/' + file._id).file-download= file.name
+          .item
+            span.file-date
+              i= file.date
+          .item
+            span.file-actions
+              a(href='/profile/delete/files/' + file._id).file-delete delete file
 

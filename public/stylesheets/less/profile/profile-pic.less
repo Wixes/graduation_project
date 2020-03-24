@@ -41,31 +41,76 @@ input[type='file'] {
 }
 
 .file-download {
-    text-decoration: none;
+    color: rgb(0, 0, 201);
 }
 
-.files-description {
-    background-color: rgb(235, 235, 235);
+.file-download:hover {
+    color: rgb(36, 36, 255);
+}
+
+.file-download {
+    text-decoration: none;
 }
 
 .files-list {
     font-size: large;
     display: grid;
-    grid-template-columns: 1fr 3fr 1fr 1fr;
+    grid-template-columns: [col-start] auto [col-end];
+    grid-template-rows: [header-start] 50px [header-end row-start] auto [row-end];
     border-top: 1px solid black;
     border-right: 1px solid black;
+    overflow: hidden;
+    background: rgba(201, 201, 201, 0.185);
 }
 
-.files-list > span {
-    padding: 8px;
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
+.files-list > * {
+    padding: 10px;
+    position: relative;
 }
 
-.item {
-    background-color: rgb(235, 235, 235);
+.files-description {
+    background-color: rgba(32, 32, 32, 0.39);
+    grid-row: header;
+    color: #fff;
 }
 
-.item:hover {
-    background-color: rgb(198, 202, 255);
+.item span {
+    position: relative;
+    z-index: 2;
+}
+
+.item:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1000%;
+    left: -1000%;
+    z-index: 1;
+}
+
+.item:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;
+    width: 1px;
+    z-index: 2;
+    background-color: rgba(114, 114, 114, 0.459);
+}
+
+.item:nth-child(4n+4)::after {
+    bottom: -1px;
+    right: 0;
+    left: -1000%;
+    height: 1px;
+    z-index: 3;
+    width: auto;
+    top: auto;
+    background-color: rgba(114, 114, 114, 0.459);
+}
+
+.item:hover::before {
+    background-color: rgba(114, 114, 114, 0.459);
 }
