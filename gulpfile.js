@@ -22,8 +22,8 @@ function server(done) {
                            // to prevent multiple browser-sync servers
     nodemon({
         script: 'bin/www',
-        watch: ['./public/stylesheets/less/**/', './views/**/'],
-        ext: '.less .pug',
+        watch: ['./public/stylesheets/less/**/', './views/**/', './public/javascript/*'],
+        ext: '.less .pug .js',
         tasks: ['styles'],
         done: done
     })

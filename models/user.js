@@ -31,7 +31,12 @@ const user = new mongoose.Schema({
     files: [{
         name: String,
         path: String,
-        date: String
+        created: String,
+        place: String,
+        subject: String,
+        date: String,
+        mark: String,
+        kind: String
     }],
     picture: {
         type: String,

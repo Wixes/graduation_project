@@ -60,14 +60,16 @@ module.exports = {
             let date = new Date();
             rObj['name'] = obj.originalname
             rObj['path'] = obj.path
-            rObj['date'] = date.toISOString().substring(0, 10)
+            rObj['created'] = date.toISOString().substring(0, 10)
             return rObj
         });        
 
         // Find user and update his files with $push operation
-        await User.findByIdAndUpdate(req.user._id, {$push: {
-            files: files
-        }}).exec();
+        await User.findByIdAndUpdate(req.user._id, {
+            $push: {
+                files: files
+            }
+        }).exec();
 
         res.redirect('/profile');
     },
@@ -94,9 +96,11 @@ module.exports = {
             if (file._id == req.params.id) {
 
                 // Find user and delete specific field in database
-                await User.findByIdAndUpdate(req.user._id, {$pull: {
-                    files: file
-                }}).exec();
+                await User.findByIdAndUpdate(req.user._id, {
+                    $pull: {
+                        files: file
+                    }
+                }).exec();
 
                 // delete file from filesystem
                 await fs.unlink(file.path, function(err) {
@@ -116,5 +120,40 @@ module.exports = {
                 console.log('There is no such file for deletion!');
             }
         };
+    },
+
+    edit_file: async (req, res, next) => {
+        let fileInformation = req.body;
+        // Change the value of file kind
+        switch (fileInformation.kind) {
+            case "0":
+                fileInformation.kind = 'Грамота';
+                break;
+            case "1":
+                fileInformation.kind = 'Благодарственное письмо';
+                break;
+            case "2":
+                fileInformation.kind = 'Сертификат';
+                break;
+        }
+        console.log('params: ' + req.params.id);
+        console.log('user: ' + req.user._id);
+        // Find user and save changes
+        await User.update({"_id": req.user._id, "files._id": req.params.id}, {
+            $set: {
+                "files.$.name": fileInformation.name,
+                "files.$.kind": fileInformation.kind,
+                "files.$.mark": fileInformation.mark,
+                "files.$.subject": fileInformation.subject,
+                "files.$.place": fileInformation.place,
+                "files.$.date": fileInformation.date
+            }
+        }, function (err, doc) {
+            if (err) console.log('Error!');
+        });
+
+        // Redirect to the profile page
+        res.redirect('/profile');
     }
+
 }

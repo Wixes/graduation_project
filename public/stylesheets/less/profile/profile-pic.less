@@ -11,6 +11,7 @@ input[type='file'] {
 }
 
 .files {
+    position: relative;
     background-color: rgba(168, 168, 255, 0.4);
     margin: 20px 0 0 0;
 }
@@ -52,6 +53,17 @@ input[type='file'] {
     text-decoration: none;
 }
 
+.file-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-actions {
+    display: flex;
+    flex-direction: column;
+}
+
+// GRID OPTIONS
 .files-list {
     font-size: large;
     display: grid;
@@ -100,7 +112,7 @@ input[type='file'] {
     background-color: rgba(114, 114, 114, 0.459);
 }
 
-.item:nth-child(4n+4)::after {
+.item:nth-child(8n+8)::after {
     bottom: -1px;
     right: 0;
     left: -1000%;
@@ -113,4 +125,46 @@ input[type='file'] {
 
 .item:hover::before {
     background-color: rgba(114, 114, 114, 0.459);
+}
+
+// Modal options
+
+#edit-file {
+    display: block;
+    position: absolute;
+    padding: 30px;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+.modal-wrapper {
+    width: 80%;
+    padding: 20px 0;
+    background-color: #CFCFFF;
+    margin: 0 auto;
+}
+
+.modal-wrapper > form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.modal-wrapper > form > * {
+    padding: 5px 0;
+}
+
+.modal-close {
+    cursor: pointer;
+    color: black;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.edit-file-submit {
+    width: 30%;
 }

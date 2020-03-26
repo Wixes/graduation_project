@@ -15,4 +15,7 @@ router.post('/upload/files', passport.authenticate('jwt', { session: false }), u
 router.get('/download/files/:id', passport.authenticate('jwt', { session: false }), profileController.download_files);
 
 router.get('/delete/files/:id', passport.authenticate('jwt', { session: false }), profileController.delete_files);
+
+router.post('/edit/file/:id', passport.authenticate('jwt', { session: false }), profileController.edit_file);
+
 module.exports = router;
