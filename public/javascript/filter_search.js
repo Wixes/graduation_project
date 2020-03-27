@@ -1,48 +1,7 @@
-/* window.onload = function() {
-    let filter = () => {
-        // Element for input value
-        let searchMark = document.getElementById('search-mark');
-        // Add keyup event to track pressing keys
-        searchMark.addEventListener('keyup', function() {
-            // Entire div block with span inside (which has innerHTML)
-            let filterItems = document.querySelectorAll('.item-file-mark');
-            // Filter for inserting values
-            let filterCases = searchMark.value.toLowerCase();
-            // Check each item in filterItems
-            filterItems.forEach(item => {
-                let childItem = item.children[0].innerHTML;
-                // Delete all unnecessary tabs if exists
-                childItem = childItem.replace(/\s/g, '');
-                // Check if values the same
-                if (childItem.toLowerCase().indexOf(filterCases) > -1) {
-                    // Take data attribute of item
-                    let itemData = item.getAttribute('data-item');
-                    // Take all elements with the same data-item attr
-                    let itemRow = document.querySelectorAll(`[data-item='${itemData}']`);
-                    // Change style for each element
-                    itemRow.forEach(elem => {
-                        elem.style.display = '';
-                    })
-                    
-                } else {
-                    // Opposite actions
-                    let itemData = item.getAttribute('data-item');
-                    let itemRow = document.querySelectorAll(`[data-item='${itemData}']`);
-                    itemRow.forEach(elem => {
-                        elem.style.display = 'none';
-                    })
-                }
-            });
-
-        });
-    }
-    
-    filter();
-} */
-
 window.onload = function() {
     let filter = () => {
         // Search input for each field (mark. subject, place, date)
+        let searchKind = document.getElementById('search-kind');
         let searchMark = document.getElementById('search-mark');
         let searchSubject = document.getElementById('search-subject');
         let searchPlace = document.getElementById('search-place');
@@ -50,7 +9,6 @@ window.onload = function() {
 
         // All items with data-item attribute
         let dataItems = document.querySelectorAll('[data-item]');
-        console.log('just row items: ', dataItems);
 
         // Array for storing elements in the order (1st elem =  all elements with [data-item = '1'] etc...)
         let itemsArray = [];
@@ -61,46 +19,51 @@ window.onload = function() {
                 itemsArray[attr] = [];
             itemsArray[attr].push(item);
         });
-        console.log('array: ', itemsArray);
-        console.log('test elem: ', itemsArray[0][1]);
+
+        // Add event 'keyup' for search kind
+        searchKind.addEventListener('keyup', function() {
+            console.log('key is pressed');
+            let itemParam = searchKind.value.toLowerCase();
+            searchHandler('.item-file-kind', itemsArray, itemParam);
+        })
 
         // Add event 'keyup' for search mark
         searchMark.addEventListener('keyup', function() {
             console.log('key is pressed');
-            searchHandler('.item-file-mark', itemsArray);
+            let itemParam = searchMark.value.toLowerCase();
+            searchHandler('.item-file-mark', itemsArray, itemParam);
         });
 
         // Add event 'keyup' for search subject
         searchSubject.addEventListener('keyup', function() {
             console.log('key is pressed');
-            searchHandler('.item-file-subject', itemsArray);
+            let itemParam = searchSubject.value.toLowerCase();
+            searchHandler('.item-file-subject', itemsArray, itemParam);
         });
 
         // Add event 'keyup' for search place
         searchPlace.addEventListener('keyup', function() {
             console.log('key is pressed');
-            searchHandler('.item-file-place', itemsArray);
+            let itemParam = searchPlace.value.toLowerCase();
+            searchHandler('.item-file-place', itemsArray, itemParam);
         });
 
         // Add event 'keyup' for search date
         searchDate.addEventListener('keyup', function() {
             console.log('key is pressed');
-            searchHandler('.item-file-date', itemsArray);
+            let itemParam = searchDate.value.toLowerCase();
+            searchHandler('.item-file-date', itemsArray, itemParam);
         });
     };
 
     filter();
 
     // Function to handle search
-    let searchHandler = (itemClass, itemsArray) => {
-        console.log('itemsArray from function:', itemsArray);
-        let items = document.querySelectorAll(itemClass);
-        console.log('items from function: ', items);
-        let newItem;
-        
+    let searchHandler = (itemClass, itemsArray, key) => {
+
         // Create new array with the same elements from different data-item
         let sortItems = itemsArray.map(el => {
-            console.log('element: ', el);
+            let newItem;
             for (const elem of el) {
                 if(elem.matches(itemClass))
                     newItem = elem;
@@ -108,7 +71,24 @@ window.onload = function() {
             return newItem;
         });
         
-        console.log('Array with elements from different data-items: ', sortItems);
+        // Check if input value is equivalent to one of the elements
+        sortItems.forEach(elem => {
+            // Take value of element (remember, we have span inside main div,
+            // that's why we use children[0])
+            let childItem = elem.children[0].innerHTML;
+            if(childItem.toLowerCase().indexOf(key) > -1) {
+                let itemData = elem.getAttribute('data-item');
+                itemsArray[itemData].forEach(el => {
+                    el.style.display = '';
+                });
+            } else {
+                let itemData = elem.getAttribute('data-item');
+                itemsArray[itemData].forEach(el => {
+                    el.style.display = 'none';
+                });
+            }
+        });
 
     };
+
 }
