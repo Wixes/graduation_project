@@ -18,7 +18,7 @@ block content
     else 
       form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
         label(for='files-upload').custom-files-upload Добавить файлы
-        input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')
+        input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')       
       #files-list.files-list
         span.files-description.files-index
           strong Номер
@@ -26,37 +26,41 @@ block content
           strong Название
         span.files-description.files-kind
           strong Тип
-        span.files-description.fles-mark
+        span.files-description.files-mark
           strong Оценка
+          input(type='text', id='search-mark', name='search-mark' placeholder='Введите оценку').search-input
         span.files-description.files-details
           strong Описание (тема выступления, место)
+          input(type='text', id='search-subject', name='search-subject' placeholder='Введите тему').search-input
+          input(type='text', id='search-place', name='search-place' placeholder='Введите место').search-input
         span.files-description.files-date
           strong Дата участия
+          input(type='text', id='search-date', name='search-date' placeholder='Введите дату участия').search-input
         span.files-description.files-created
           strong Дата создания
         span.files-description.files-actions
           strong Действие
         each file, index in files
-          .item
+          .item(data-item=index).item-file-index
             span.file-index
               i #{index+1}
-          .item
+          .item(data-item=index).item-file-name
             span.file-name
               a(href='/profile/download/files/' + file._id).file-download= file.name
-          .item
+          .item(data-item=index).item-file-kind
             span.file-kind #{file.kind}
-          .item
+          .item(data-item=index).item-file-mark
             span.file-mark #{file.mark}
-          .item
+          .item(data-item=index).item-file-details
             span.file-details
               .file-subject Тема: #{file.subject}
               .file-place Место: #{file.place}
-          .item
+          .item(data-item=index).item-file-date
             span.file-date #{file.date}
-          .item
+          .item(data-item=index).item-file-created
             span.file-created
               i= file.created
-          .item
+          .item(data-item=index).item-file-actions
             span.file-actions
               a(href='/profile/delete/files/' + file._id).file-delete delete file
               a(href='#change-file' onclick=`editFile(${JSON.stringify(file)})`).file-edit change file

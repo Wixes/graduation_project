@@ -134,7 +134,7 @@ input[type='file'] {
   font-size: large;
   display: grid;
   grid-template-columns: [col-start] auto [col-end];
-  grid-template-rows: [header-start] 50px [header-end row-start] auto [row-end];
+  grid-template-rows: [header-start] auto [header-end row-start] auto [row-end];
   border-top: 1px solid black;
   border-right: 1px solid black;
   overflow: hidden;
@@ -145,6 +145,11 @@ input[type='file'] {
   position: relative;
 }
 .files-description {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
   background-color: rgba(32, 32, 32, 0.39);
   grid-row: header;
   color: #fff;
@@ -221,4 +226,8 @@ input[type='file'] {
 }
 .edit-file-submit {
   width: 30%;
+}
+.search-input {
+  width: 70%;
+  margin: 10px 0 0 0;
 }
