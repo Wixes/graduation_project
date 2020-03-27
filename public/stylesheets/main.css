@@ -81,6 +81,8 @@ input[type='file'] {
   font-size: large;
 }
 .files {
+  min-width: 1024px;
+  width: 100%;
   position: relative;
   background-color: rgba(168, 168, 255, 0.4);
   margin: 20px 0 0 0;
@@ -104,7 +106,6 @@ input[type='file'] {
   margin: 10px 0;
 }
 .file-delete {
-  margin: 0 20px;
   color: rgba(163, 8, 47, 0.8);
 }
 .file-download {
@@ -130,7 +131,12 @@ input[type='file'] {
   -webkit-box-direction: normal;
           flex-direction: column;
 }
+.item-file-actions {
+  margin: 0 20px;
+}
 .files-list {
+  width: 100%;
+  min-width: 1024px;
   font-size: large;
   display: grid;
   grid-template-columns: [col-start] auto [col-end];
@@ -163,8 +169,8 @@ input[type='file'] {
   position: absolute;
   top: 0;
   bottom: 0;
-  right: -1000%;
-  left: -1000%;
+  right: -10000%;
+  left: -10000%;
   z-index: 1;
 }
 .item:after {
@@ -177,15 +183,14 @@ input[type='file'] {
   z-index: 2;
   background-color: rgba(114, 114, 114, 0.459);
 }
-.item:nth-child(8n+8)::after {
+.item:nth-child(9n+9)::after {
   bottom: -1px;
   right: 0;
-  left: -1000%;
+  left: -10000%;
   height: 1px;
   z-index: 3;
   width: auto;
   top: auto;
-  background-color: rgba(114, 114, 114, 0.459);
 }
 .item:hover::before {
   background-color: rgba(114, 114, 114, 0.459);
