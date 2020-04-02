@@ -1,48 +1,47 @@
 - const log = "login"
 - const reg = "register"
 header.Header
-  .logo
-  if isAuthorised
-    ul.user
-      li
-        a(href="/profile") #{name}
-      li
-        a(href="/logout") Logout
-  else
-    ul.guest
-      li
-        a(href='#login' onclick=`modalHandler(${JSON.stringify(log)})`).guest__action Войти
-      li
-        a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).guest__action Зарегистрироваться
+  .Header__wrapper
+    .logo
+      img(src="/utils/logo.png").logo__image
+    if isAuthorised
+      ul.user
+        li.user__item
+          a(href="/profile").user__action #{name}
+        li.user__item
+          a(href="/logout").user__action Logout
+    else
+      ul.guest
+        li.guest__item
+          a(href='#login' onclick=`modalHandler(${JSON.stringify(log)})`).guest__action Войти
+        li.guest__item
+          a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).guest__action Зарегистрироваться
   // Modal window
   #modal.modal
-    .modal-content
-      span.modal__close &times;
-      ul.actions
-        li.actions__item
-          a(href='#login' onclick=`modalHandler(${JSON.stringify(log)})`).actions__link Вход
-        li.actions__item
-          a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).actions__link Регистрация
-      #login.action__content Вход
-        form(action='/login', method='post')
-          p Enter login and pass
-          br
-          p email:
-            input(type='text', name='email')
-          p password:
-            input(type='password', name='password')
-          input(type='submit', value='submit')
-      #register.action__content Регистрация
-        form(action='/register', method='post')
-          p Leave your contacts
-          br
-          p First name:
-            input(type='text', name='firstname')
-          p Last name:
-            input(type='text' name='lastname')
-          p E-mail:
-            input(type='email' name='email')
-          p Password:
-            input(type='password' name='password')
-          input(type='submit', value='Submit')
+    .modal__wrapper
+      .modal__content
+        span.modal__close &times;
+        ul.actions
+          li.actions__item
+            a(href='#login' onclick=`modalHandler(${JSON.stringify(log)})`).actions__link Вход
+          li.actions__item
+            a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).actions__link Регистрация
+        #login.actions__content
+          form(action='/login', method='post').action-form
+            p.action-form__label Электронная почта:
+              input(type='text', name='email' placeholder='user@mail.ru').action-form__input
+            p.action-form__label Пароль:
+              input(type='password', name='password' placeholder='12345678..').action-form__input
+            input(type='submit', value='Отправить').action-form__button
+        #register.actions__content
+          form(action='/register', method='post').action-form
+            p.action-form__label Ваше имя:
+              input(type='text', name='firstname' placeholder='Имя').action-form__input
+            p.action-form__label Ваша фамилия:
+              input(type='text' name='lastname' placeholder='Фамилия').action-form__input
+            p.action-form__label Электронная почта:
+              input(type='email' name='email' placeholder='user@mail.ru').action-form__input
+            p.action-form__label Пароль:
+              input(type='password' name='password' placeholder='123456678..').action-form__input
+            input(type='submit', value='Отправить').action-form__button
     

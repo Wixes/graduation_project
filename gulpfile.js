@@ -1,5 +1,6 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
+const concat = require('gulp-concat');
 const autoprefixer = require('gulp-autoprefixer');
 const nodemon = require('gulp-nodemon');
 const browserSync = require('browser-sync').create();
@@ -12,7 +13,16 @@ gulp.task('styles', done => {
         .src('./public/stylesheets/main.less')
         .pipe(less({strictMath: true}))
         .pipe(autoprefixer({cascade: true}))
-        .pipe(gulp.dest('./public/stylesheets'));
+        .pipe(gulp.dest('./build/stylesheets'));
+    done();
+});
+
+// minify js
+gulp.task('js', done => {
+    gulp
+        .src('./public/javascript/*.js', { sourceMaps: true })
+        .pipe(concat('app.min.js'))
+        .pipe(gulp.dest('./build/js', { sourcemaps: true }));
     done();
 });
 
@@ -22,9 +32,9 @@ function server(done) {
                            // to prevent multiple browser-sync servers
     nodemon({
         script: 'bin/www',
-        watch: ['./public/stylesheets/less/**/', './views/**/', './public/javascript/*'],
+        watch: ['./public/**/*', './views/**/'],
         ext: '.less .pug .js',
-        tasks: ['styles'],
+        tasks: ['styles', 'js'],
         done: done
     })
     // Nodemon will execute code below every start

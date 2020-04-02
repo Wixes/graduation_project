@@ -1,7 +1,7 @@
 const modalHandler = (actionId) => {
 
     let modalWindow = document.getElementById('modal');
-    let actionContent = document.getElementsByClassName('action__content');
+    let actionContent = document.getElementsByClassName('actions__content');
     let closeModal = document.getElementsByClassName("modal__close")[0];
     let linkModal = document.getElementsByClassName("actions__link");
 
