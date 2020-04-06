@@ -2,6 +2,60 @@ extends layout
 
 block content
   include includes/header.pug
-  div.content.class1
-    p here is will be content!
+  .content
+    .content__wrapper
+      h1.content__heading Храни все грамоты в одном месте
+      section.preview
+        .preview__text
+          p.preview__description
+            | Грамоты, награды, благодарственные письма и многое другое, всегда под рукой.
+            | Встроенный фильтр поможет отсортировать нужные документы
+            | без нудного поиска и долгого ожидания.
+        img(src='utils/heading_photo.jpg').preview__picture
+      section.purpose
+        h3.purpose__heading Наши преимущества
+        .purpose__advantages
+          .purpose__item
+            img(src='utils/purpose-img1.png').purpose__image
+            .purpose__description
+              h4.purpose__label Множественная загрузка
+              p.purpose__text Загружайте сразу множество документов одним кликом!
+          .purpose__item
+            img(src='utils/purpose-img2.png').purpose__image
+            .purpose__description
+              h4.purpose__label Удобная фильтрация
+              p.purpose__text Поиск документов в списке больше не заставит тратить много времени!
+          .purpose__item
+            img(src='utils/purpose-img3.png').purpose__image
+            .purpose__description
+              h4.purpose__label Интеграция
+              p.purpose__text
+                | Наш сервис использует API социальных сетей для входа,
+                |  больше не обязательно регистрироваться!
+      section.slider
+        h3.slider__heading Наши отзывы
+        .slider__wrapper
+          .slider__item
+            img(src='utils/review-img1.jpg').slider__image
+            .slider__description
+              .slider__name Марьванна Один
+              p.slider__text Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+          .slider__item
+            img(src='utils/review-img2.jpg').slider__image
+            .slider__description
+              .slider__name Марьвана Два
+              p.slider__text 
+                | Lorem Ipsum is simply dummy text of the printing and 
+                | typesetting industry. Lorem Ipsum has been the industry's standard
+                | dummy text ever since the 1500s, when an unknown printer took a galley
+                | of type and scrambled it to make a type specimen book.
+          .slider__item
+            img(src='utils/review-img3.jpg').slider__image
+            .slider__description
+              .slider__name Марьванна Три
+              p.slider__text 
+                | Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                | Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+          button(onclick='nextSlide(-1)').slider__button.slider__button--display-previous &#10094;
+          button(onclick='nextSlide(1)').slider__button.slider__button--display-next &#10095;
   include includes/footer.pug

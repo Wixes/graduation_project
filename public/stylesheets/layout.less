@@ -5,6 +5,10 @@
     outline: none;
 }
 
+*::before, ::after {
+    box-sizing: border-box;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -12,6 +16,6 @@ body {
 }
 
 .content {
-    max-width: 100%;
+    width: 100%;
     margin: 0 auto;
 }
