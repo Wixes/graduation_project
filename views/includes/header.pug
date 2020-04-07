@@ -17,31 +17,5 @@ header.Header
         li.guest__item
           a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).guest__action Зарегистрироваться
   // Modal window
-  #modal.modal
-    .modal__wrapper
-      .modal__content
-        span.modal__close &times;
-        ul.actions
-          li.actions__item
-            a(href='#login' onclick=`modalHandler(${JSON.stringify(log)})`).actions__link Вход
-          li.actions__item
-            a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).actions__link Регистрация
-        #login.actions__content
-          form(action='/login', method='post').action-form
-            p.action-form__label Электронная почта:
-              input(type='text', name='email' placeholder='user@mail.ru').action-form__input
-            p.action-form__label Пароль:
-              input(type='password', name='password' placeholder='12345678..').action-form__input
-            input(type='submit', value='Отправить').action-form__button
-        #register.actions__content
-          form(action='/register', method='post').action-form
-            p.action-form__label Ваше имя:
-              input(type='text', name='firstname' placeholder='Имя').action-form__input
-            p.action-form__label Ваша фамилия:
-              input(type='text' name='lastname' placeholder='Фамилия').action-form__input
-            p.action-form__label Электронная почта:
-              input(type='email' name='email' placeholder='user@mail.ru').action-form__input
-            p.action-form__label Пароль:
-              input(type='password' name='password' placeholder='123456678..').action-form__input
-            input(type='submit', value='Отправить').action-form__button
+  
     

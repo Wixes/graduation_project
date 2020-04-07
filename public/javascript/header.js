@@ -10,6 +10,11 @@ const modalHandler = (actionId) => {
         document.getElementById(actionId).style.display = "none";
         modalWindow.style.display = "none";
         window.history.replaceState("", document.title, window.location.pathname);
+        // Prevents the loses of scroll position when modal is open and the body set to be fixed
+        const scrollY = document.body.style.top;
+        document.body.style.position = '';
+        document.body.style.top = '';
+        window.scrollTo(0, parseInt(scrollY || '0') * -1);
     }
 
     // Close the modal window when user clicks outside the modal window
@@ -18,6 +23,11 @@ const modalHandler = (actionId) => {
             document.getElementById(actionId).style.display = "none";
             modalWindow.style.display = "none";
             window.history.replaceState("", document.title, window.location.pathname);
+            // Prevents the loses of scroll position when modal is open and the body set to be fixed
+            const scrollY = document.body.style.top;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
         }
     }
 
@@ -29,6 +39,8 @@ const modalHandler = (actionId) => {
     // Show the modal window
     modalWindow.style.display = "flex";
     modalWindow.style.flexDirection = "column";
+    document.body.style.position = 'fixed';
+    document.body.style.top = `${window.scrollY}px`;
 
     // Display content for modal window
     switch(actionId) {
