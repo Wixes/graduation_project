@@ -1,6 +1,8 @@
 extends layout
 
 block content
+  - const log = "login"
+  - const reg = "register"
   include includes/header.pug
   .content
     .content__wrapper
@@ -62,12 +64,12 @@ block content
       section.slider
         h3.slider__heading Наши отзывы
         .slider__wrapper
-          .slider__item
+          .slider__item.slider__item--isVisible(data-image='0')
             img(src='utils/review-img1.jpg').slider__image
             .slider__description
               .slider__name Марьванна Один
               p.slider__text Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          .slider__item
+          .slider__item(data-image='1')
             img(src='utils/review-img2.jpg').slider__image
             .slider__description
               .slider__name Марьвана Два
@@ -76,13 +78,13 @@ block content
                 | typesetting industry. Lorem Ipsum has been the industry's standard
                 | dummy text ever since the 1500s, when an unknown printer took a galley
                 | of type and scrambled it to make a type specimen book.
-          .slider__item
+          .slider__item(data-image='2')
             img(src='utils/review-img3.jpg').slider__image
             .slider__description
               .slider__name Марьванна Три
               p.slider__text 
                 | Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                 | Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
-          button(onclick='nextSlide(-1)').slider__button.slider__button--display-previous &#10094;
-          button(onclick='nextSlide(1)').slider__button.slider__button--display-next &#10095;
+          button(onclick='changeSlide(-1)').slider__button.slider__button--display-previous &#10094;
+          button(onclick='changeSlide(1)').slider__button.slider__button--display-next &#10095;
   include includes/footer.pug

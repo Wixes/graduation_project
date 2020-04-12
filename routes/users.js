@@ -12,11 +12,16 @@ const passportConfig = require('../passport');
 router.get('/', function(req, res, next) {
   passport.authenticate('jwt', {session: false}, (err, user, profile) => {
     if (err) return next(err);
-    if (!user) return res.render('index'); // Render page for guest
-    return res.render('index', {           // Render page for user
+    // Render page for guest
+    if (!user) 
+        return res.render('index', {
+          title: "Record your achievments!"
+        }); 
+    // Render page for user
+    return res.render('index', {           
        title: "Record your achievments!", 
        isAuthorised: true,
-       name: user.firstname
+       firstname: user.firstname
        })
   })(req, res, next); // Sends arguments to the callback
                       // (For more info check this link:

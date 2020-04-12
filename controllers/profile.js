@@ -12,21 +12,24 @@ module.exports = {
         // default picture Will be rendered
         fs.readFile(req.user.picture, function(err, data) {
             let avatar = '';
+            let files = 0;
+            const achieveCount = req.user.files.length;
             // If file doesn't exist, then encode 'avatar' with default image
             if (err) {
-                avatar = base64pic(fs.readFileSync('uploads/avatars/default.jpg'));
+                avatar = base64pic(fs.readFileSync('build/utils/default.jpg'));
             } else {
                 avatar = base64pic(data);
             };
             // Check if files in database
-            let files = 0;
             if (!req.user.files.length == 0)
                 files = req.user.files;
 
             res.render('profile', {
                 isAuthorised: true,
                 title: `${req.user.firstname} profile`,
-                name: req.user.firstname,
+                firstname: req.user.firstname,
+                lastname: req.user.lastname,
+                achieveCount: achieveCount,
                 avatar: avatar,
                 files: files
             });

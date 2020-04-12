@@ -1,7 +1,9 @@
-window.onload = function() {
+window.onload = () => {
     let filter = () => {
         // Search input for each field (mark. subject, place, date)
+        console.log('filter is activated');
         let searchKind = document.getElementById('search-kind');
+        if (searchKind === null) return;
         let searchMark = document.getElementById('search-mark');
         let searchSubject = document.getElementById('search-subject');
         let searchPlace = document.getElementById('search-place');

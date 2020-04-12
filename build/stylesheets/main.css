@@ -208,6 +208,8 @@ body {
   font-size: 15px;
 }
 .slider__image {
+  max-height: 200px;
+  max-width: 300px;
   margin-right: 20px;
 }
 .slider__description {
@@ -236,50 +238,6 @@ body {
 }
 .slider__button--disabled {
   display: none;
-}
-.Header {
-  background-color: #414141;
-}
-.Header__wrapper {
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-align: center;
-          align-items: center;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  max-width: 1920px;
-  width: 95%;
-  margin: 0 auto;
-}
-.user {
-  list-style-type: none;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  height: 40px;
-}
-.user__action {
-  text-decoration: none;
-  color: #fff;
-}
-.guest {
-  list-style-type: none;
-  display: -webkit-box;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-          justify-content: space-between;
-  height: 40px;
-}
-.guest__action {
-  text-decoration: none;
-  color: #fff;
 }
 .actions {
   font-weight: bold;
@@ -389,6 +347,50 @@ body {
 .action-form__button:hover {
   background-color: #B3B6B4;
 }
+.Header {
+  background-color: #414141;
+}
+.Header__wrapper {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  max-width: 1920px;
+  width: 95%;
+  margin: 0 auto;
+}
+.user {
+  list-style-type: none;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  height: 40px;
+}
+.user__action {
+  text-decoration: none;
+  color: #fff;
+}
+.guest {
+  list-style-type: none;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+          justify-content: space-between;
+  height: 40px;
+}
+.guest__action {
+  text-decoration: none;
+  color: #fff;
+}
 .Footer {
   background-color: #414141;
   width: 100%;
@@ -404,11 +406,73 @@ body {
 .Footer__link {
   color: #c7c7c7;
 }
-.profile-pic {
-  width: 330px;
+.profile {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+          flex-direction: row;
+  flex-wrap: wrap;
+  -webkit-box-pack: center;
+          justify-content: center;
+  margin: 20px auto;
+  padding: 5px;
+  max-width: 900px;
+  width: 100%;
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+.profile__pic {
+  max-height: 300px;
+}
+.profile__avatar {
+  position: relative;
+  overflow: hidden;
+}
+.profile__avatar:hover .profile__button {
+  opacity: 1;
+}
+.profile__button {
+  opacity: 0;
+  box-sizing: border-box;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+  background-image: -webkit-gradient(linear, left bottom, left top, from(rgba(45, 45, 45, 0.2)), color-stop(rgba(88, 88, 88, 0.4)), color-stop(rgba(134, 134, 134, 0.6)), to(rgba(183, 183, 183, 0.8)));
+  background-image: linear-gradient(to top, rgba(45, 45, 45, 0.2), rgba(88, 88, 88, 0.4), rgba(134, 134, 134, 0.6), rgba(183, 183, 183, 0.8));
+  color: #fff;
+  border-radius: 5px;
+  padding: 16px;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+.profile__label {
+  font-size: 18px;
+  color: #555;
+  margin: 15px 5px;
 }
 input[type='file'] {
   display: none;
+}
+.list-empty__wrapper {
+  text-align: center;
+  margin: 50px auto;
+  width: 50%;
+  border: 5px dashed grey;
+}
+.list-empty__text {
+  font-size: 25px;
+  color: #555;
+}
+.list-empty__text:first-child {
+  margin: 40px 0 0 0;
+}
+.list-empty__text:nth-child(2) {
+  margin: 0 0 20px 0;
 }
 .list-empty > p {
   font-size: large;
@@ -417,7 +481,7 @@ input[type='file'] {
   min-width: 1024px;
   width: 100%;
   position: relative;
-  background-color: rgba(168, 168, 255, 0.4);
+  background-color: rgba(207, 207, 207, 0.4);
   margin: 20px 0 0 0;
 }
 .custom-avatar-upload {
@@ -435,11 +499,23 @@ input[type='file'] {
   color: #fff200;
   border: 1px solid black;
   border-radius: 5px;
+  margin: 10px 0 10px 10px;
   padding: 10px;
-  margin: 10px 0;
 }
 .file-delete {
-  color: rgba(163, 8, 47, 0.8);
+  margin: 5px 0 0 0;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(163, 8, 47, 0.8);
+  color: #fff;
+}
+.file-edit {
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: rgba(8, 119, 163, 0.8);
+  color: #fff;
 }
 .file-download {
   color: #0000c9;
@@ -538,34 +614,67 @@ input[type='file'] {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
-.modal-wrapper {
-  width: 80%;
-  padding: 20px 0;
-  background-color: #CFCFFF;
+.edit-file__wrapper {
+  width: 750px;
+  padding: 20px;
+  background-color: #ebebeb;
+  border: 2px solid black;
+  border-radius: 10px;
   margin: 0 auto;
 }
-.modal-wrapper > form {
+.edit-file__text {
+  display: inline-block;
+  font-size: 20px;
+  width: 150px;
+}
+.edit-file__form {
   display: -webkit-box;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
           flex-direction: column;
-  width: 50%;
 }
-.modal-wrapper > form > * {
+.edit-file__form > * {
   padding: 5px 0;
 }
-.modal-close {
+.edit-file__input {
+  width: 300px;
+  margin: 0 0 0 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #7e7e7e;
+}
+.edit-file__select {
+  background-color: #fff;
+  width: 300px;
+  margin: 0 0 0 10px;
+  font-size: 20px;
+  border-bottom: 1px solid #7e7e7e;
+}
+.edit-file__submit {
+  cursor: pointer;
+  font-size: 20px;
+  margin: 0 auto;
+  padding: 8px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  background-color: #4e744e;
+  color: #fff;
+}
+.edit-file__close {
   cursor: pointer;
   color: black;
   float: right;
+  margin: 0 15px 0 0;
   font-size: 28px;
   font-weight: bold;
 }
-.edit-file-submit {
-  width: 30%;
-}
 .search-input {
+  background-color: #f0f0f0;
+  padding: 2px;
+  color: black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  font-size: 20px;
   width: 70%;
   margin: 10px 0 0 0;
 }

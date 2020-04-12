@@ -1,20 +1,30 @@
 extends layout
 block content
   include includes/header.pug
-  .content.class1
-    p HELLO #{name}, how are ya?
-    img.profile-pic(src="data:image/jpeg; base64, " + avatar)
-    form(action='/profile/upload/image', method='post', enctype='multipart/form-data')
-      label(for="avatar-upload").custom-avatar-upload Изменить
-      input(type='file', id='avatar-upload', name='avatar-upload', onchange='this.form.submit()')
+  .profile
+    .profile__avatar
+      img(src="data:image/jpeg; base64, " + avatar).profile__pic
+      label(for="avatar-upload").profile__button Изменить
+      form(action='/profile/upload/image', method='post', enctype='multipart/form-data').profile__form
+        input(type='file', id='avatar-upload', name='avatar-upload', onchange='this.form.submit()')
+    .profile__information
+      .profile__label Имя: <strong>#{firstname}</strong>
+      .profile__label Фамилия: <strong>#{lastname}</strong>
+      .profile__label Институт: <strong>(инстетуд)</strong>
+      .profile__label Кафедра: <strong>(кафидрыа)</strong>
+      if !achieveCount
+        .profile__label Количество грамот: <strong>нет грамот &#9785;</strong>
+      else
+        .profile__label Количество грамот: <strong>#{achieveCount}</strong>
   .files#files
     if !files
       .list-empty
-        form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
-          label(for='files-upload').custom-files-upload Добавить файлы
-          input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')  
-        p You don't have any files!      
-        p drag'n'drop files in this section to upload
+        .list-empty__wrapper
+          p.list-empty__text У вас нет загруженных файлов    
+          p.list-empty__text Перетащите сюда файлы, либо нажмите кнопку для загрузки файлов
+          form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
+            label(for='files-upload').custom-files-upload Добавить файлы
+            input(type='file', id='files-upload', name='files-upload', multiple, onchange='this.form.submit()')
     else 
       form(action='/profile/upload/files', method='post', enctype='multipart/form-data')
         label(for='files-upload').custom-files-upload Добавить файлы
@@ -26,19 +36,19 @@ block content
           strong Название
         span.files-description.files-kind
           strong Тип
-          input(type='text', id='search-kind', name='search-kind' placeholder='Введите тип').search-input
+          input(type='text', id='search-kind', name='search-kind' placeholder='Тип').search-input
         span.files-description.files-mark
           strong Оценка
-          input(type='text', id='search-mark', name='search-mark' placeholder='Введите оценку').search-input
+          input(type='text', id='search-mark', name='search-mark' placeholder='Оценка').search-input
         span.files-description.files-subject
           strong Тема
-          input(type='text', id='search-subject', name='search-subject' placeholder='Введите тему').search-input
+          input(type='text', id='search-subject', name='search-subject' placeholder='Тема').search-input
         span.files-description.files-place
           strong Место
-          input(type='text', id='search-place', name='search-place' placeholder='Введите место').search-input
+          input(type='text', id='search-place', name='search-place' placeholder='Место').search-input
         span.files-description.files-date
           strong Дата участия
-          input(type='text', id='search-date', name='search-date' placeholder='Введите дату участия').search-input
+          input(type='text', id='search-date', name='search-date' placeholder='Дата участия').search-input
         span.files-description.files-created
           strong Дата создания
         span.files-description.files-actions
@@ -65,6 +75,6 @@ block content
               i= file.created
           .item(data-item=index).item-file-actions
             span.file-actions
-              a(href='/profile/delete/files/' + file._id).file-delete delete file
-              a(href='#change-file' onclick=`editFile(${JSON.stringify(file)})`).file-edit change file
-
+              a(href='#change-file' onclick=`editFile(${JSON.stringify(file)})`).file-edit Редактировать
+              a(href='/profile/delete/files/' + file._id).file-delete Удалить
+  include includes/footer.pug

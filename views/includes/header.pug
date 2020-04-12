@@ -1,5 +1,3 @@
-- const log = "login"
-- const reg = "register"
 header.Header
   .Header__wrapper
     .logo
@@ -7,7 +5,7 @@ header.Header
     if isAuthorised
       ul.user
         li.user__item
-          a(href="/profile").user__action #{name}
+          a(href="/profile").user__action #{firstname}
         li.user__item
           a(href="/logout").user__action Logout
     else
@@ -16,6 +14,4 @@ header.Header
           a(href='#login' onclick=`modalHandler(${JSON.stringify(log)})`).guest__action Войти
         li.guest__item
           a(href='#register' onclick=`modalHandler(${JSON.stringify(reg)})`).guest__action Зарегистрироваться
-  // Modal window
-  
     
