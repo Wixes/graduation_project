@@ -19,14 +19,14 @@ const user = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 255,
+        maxlength: 32,
         unique: true
     },
     password: {
         type: String,
         required: true,
         minlength: 7,
-        maxlength: 128
+        maxlength: 32
     },
     files: [{
         name: String,
@@ -40,7 +40,7 @@ const user = new mongoose.Schema({
     }],
     picture: {
         type: String,
-        default: 'uploads/avatars/default.jpg'
+        default: 'build/utils/default.jpg'
     }
 });
 
@@ -54,6 +54,7 @@ user.pre('save', async function(next) {
         this.password = passwordHashed;
         next();
     } catch(error){
+        console.log('Just checking this shit');
         next(error);
     }
 });
@@ -63,6 +64,7 @@ user.methods.isValidPassword = async function(newPassword) {
     try {
         return await bcrypt.compare(newPassword, this.password);
     } catch(error) {
+        console.log('i dont know but maybe here');
         throw new Error(error);
     }
 };

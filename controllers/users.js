@@ -45,7 +45,7 @@ module.exports = {
         // Render page
         res.render('index', {
             isAuthorised: true,
-            name: user.firstname
+            firstname: user.firstname
         });
     },
 
